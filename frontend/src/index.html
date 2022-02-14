@@ -3,11 +3,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        #body { display: none }
+    </style>
 </head>
-<body class="hidden">
+<body>
 <div id="body">
     <header id="header">
-        <div class="body-width" style="justify-content: space-between; display: flex; align-items: center">
+        <div class="body-width" id="identity-logo-wrapper">
             <svg style="height: 40px" class="identity-logo" viewBox="0 0 488 115.09" version="1.1"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
                 <path class="identity-logo-icon"
@@ -36,12 +40,17 @@
     <main id="main" class="body-width">
         <div id="wallets">
             <h3>Connect a Wallet</h3>
-            <div id="wallet-adapter-container"></div>
+            <div id="wallet-adapter-container">
+                <!-- placeholder for wallet buttons -->
+            </div>
+        </div>
+        <div id="token-checking" class="hidden">
+            Looking for existing token
         </div>
         <div id="token" class="hidden">
-            <button id="token-issue-btn">Issue Token</button>
-
-            <textarea id="token-issue-result" readonly rows="8"></textarea>
+            <button id="token-issue-server-btn">Issue Token &amp; Transfer<br/><small>(server signs &amp; sends)</small></button>
+            <button id="token-issue-client-btn">Issue Token &amp; Transfer<br/><small>(client signs &amp; sends)</small></button>
+            <button id="transfer-btn">Transfer<br/><small>(token exists)</small></button>
         </div>
     </main>
 </div>

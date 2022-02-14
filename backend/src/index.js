@@ -13,6 +13,7 @@ const gatekeeperNetwork = new PublicKey(config.gatekeeperNetworkPublicKey58);
 app.get('/api/token/:key', async (request, response) => {
   const owner = new PublicKey(request.params.key);
   const connection = new Connection(clusterApiUrl(config.solanaCluster), 'confirmed');
+  const clientSigns = request.query.clientSigns === 'true';
 
   const service = new GatekeeperService(
     connection,
@@ -20,14 +21,26 @@ app.get('/api/token/:key', async (request, response) => {
     gatekeeperAuthority,
   );
 
-  // Check if a token exists, else issue one
-  let token = await service.findGatewayTokenForOwner(owner);
-  if (token === null) {
-    token = await service.issue(owner).then(tx => tx.send()).then(tx => tx.confirm());
+  let jsonResponse;
+  if (clientSigns) { // (client signs) partially sign the transaction and return the serialized transaction
+    let transaction = await service.issue(owner, {
+      feePayer: owner,
+      rentPayer: owner,
+    });
+
+    jsonResponse = {
+      serialized: bs58.encode(transaction.transaction.serialize({requireAllSignatures: false}))
+    }
+  } else { // (server signs) sends the transaction and return the token information
+    const token = await service.issue(owner).then(tx => tx.send()).then(tx => tx.confirm());
+
+    jsonResponse = {
+      token: token
+    }
   }
 
   response.setHeader('Content-Type', 'application/json');
-  response.json(token);
+  response.json(jsonResponse);
 });
 
 app.use(express.static('../frontend/dist'))

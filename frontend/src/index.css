@@ -1,12 +1,42 @@
+/* ==== Layout ==== */
+
 body, #body, html {
     height: 100vh;
     padding: 0;
     margin: 0;
 }
 
+
+#main {
+    height: calc(100vh - 56px);
+}
+
+/* ==== General ==== */
+
+* {
+    font-family: Roboto, sans-serif;
+}
+
+/* ==== Misc ==== */
 .body-width {
     width: 768px;
     margin: 0 auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==== Header ==== */
+
+#header {
+    background: #0057A5;
+}
+
+#identity-logo-wrapper {
+    justify-content: space-between;
+    display: flex;
+    align-items: center
 }
 
 .identity-logo {
@@ -18,23 +48,7 @@ body, #body, html {
     fill: white;
 }
 
-#header {
-    background: #0057A5;
-}
-
-#main {
-    height: calc(100vh - 56px);
-}
-
-* {
-    font-family: Roboto, sans-serif;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* ===== WALLET ===== */
+/* ===== Wallet Adapter ===== */
 #wallets {
     display: flex;
     align-items: center;
@@ -67,17 +81,23 @@ body, #body, html {
 }
 
 
-
-/* ===== TOKEN ===== */
+/* ===== Token ===== */
 #token {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     height: 100%;
+    gap: 0.5em;
 }
 
-#token-issue-result {
-    font-family: monospace;
-    width: 100%;
+#token-checking {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+#body {
+    display: block !important;
 }
