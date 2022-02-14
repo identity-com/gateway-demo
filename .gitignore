@@ -1,0 +1,4 @@
+/.idea
+/frontend/dist
+yarn.lock
+node_modules

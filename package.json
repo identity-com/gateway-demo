@@ -1,0 +1,12 @@
+{
+  "name": "@identity.com/gateway-demo",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "demo": "yarn && yarn start",
+    "start": "yarn workspace @identity.com/gateway-demo-frontend build && yarn workspace @identity.com/gateway-demo-backend serve"
+  }
+}

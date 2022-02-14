@@ -1,0 +1,16 @@
+{
+  "name": "@identity.com/gateway-demo-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node src/index.js",
+    "watch": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@identity.com/solana-gateway-ts": "^0.8.1",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

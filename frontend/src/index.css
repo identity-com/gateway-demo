@@ -1,0 +1,83 @@
+body, #body, html {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.body-width {
+    width: 768px;
+    margin: 0 auto;
+}
+
+.identity-logo {
+    height: 40px;
+    margin: 8px;
+}
+
+.identity-logo-icon, .identity-logo-text {
+    fill: white;
+}
+
+#header {
+    background: #0057A5;
+}
+
+#main {
+    height: calc(100vh - 56px);
+}
+
+* {
+    font-family: Roboto, sans-serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== WALLET ===== */
+#wallets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+#wallet-adapter-container {
+    width: 33%;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.wallet-adapter-button {
+    /*justify-content: space-between;*/
+    display: flex;
+    align-items: center;
+}
+
+.wallet-adapter-button > img {
+    width: 24px;
+    height: 24px;
+}
+
+.wallet-adapter-button > span {
+    padding-left: 1em;
+}
+
+
+
+/* ===== TOKEN ===== */
+#token {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+#token-issue-result {
+    font-family: monospace;
+    width: 100%;
+}
