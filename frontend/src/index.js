@@ -1,14 +1,14 @@
 import './index.css';
 import {initWalletUI} from './ui/wallet';
-import {Transaction, Connection, clusterApiUrl, SystemProgram, Keypair, PublicKey} from '@solana/web3.js';
+import {Transaction, Connection, clusterApiUrl, Keypair, PublicKey} from '@solana/web3.js';
 import bs58 from 'bs58';
 import ui from './ui/';
 import {findGatewayToken} from "@identity.com/solana-gateway-ts";
 import {createTransferTransaction, tokenUrl} from "./util";
+import config from '../../config';
 
-// TODO: Read from config
-const gatekeeperNetwork = new PublicKey('tgnuXXNMDLK8dy7Xm1TdeGyc95MDym4bvAQCwcW21Bf');
-let connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+const gatekeeperNetwork = new PublicKey(config.gatekeeperNetworkPublicKey58);
+let connection = new Connection(clusterApiUrl(config.solanaCluster), 'confirmed');
 let connectedWallet;
 
 /**
@@ -38,7 +38,7 @@ const onWalletConnected = async (wallet) => {
 /**
  * Triggers when the user disconnects a wallet
  */
-const onWalletDisconnected = (wallet) => {
+const onWalletDisconnected = () => {
   connectedWallet = undefined;
   ui.showWallets();
 }
