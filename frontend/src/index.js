@@ -80,10 +80,19 @@ const sendTransactions = async (data) => {
  */
 const issueToken = (clientSigns = true) => {
   fetch(tokenUrl(connectedWallet.publicKey, clientSigns))
-    .then(response => response.json())
-    .then(response => {
+    .then(async(response) => {
+      if (!response.ok) {
+        const json = await response.json();
+
+        if (json.error) {
+          throw new Error(json.error);
+        }
+        throw new Error(response.statusText);
+      }
+
       return response;
     })
+    .then(response => response.json())
     .then(sendTransactions)
     .catch(ui.showError);
 }
