@@ -12,7 +12,7 @@ content and the backend web service.
 ```bash
 yarn demo
 ```
-## Configuring the demo
+## Configure the demo
 To configure the application to use a different gatekeeper, network or other settings, update the `config.js`
 in the root of the project:
 ```javascript
