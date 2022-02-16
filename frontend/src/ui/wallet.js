@@ -8,7 +8,7 @@ const WALLETS = [
 ]
 
 /**
- * Creates the button for the wallet adapter
+ * Creates the buttons for the wallet adapter
  */
 const createButton = (wallet, fnConnected, fnDisconnected) => {
   const button = document.createElement('button');

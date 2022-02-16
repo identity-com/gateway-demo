@@ -5,6 +5,7 @@ The Gateway demo application show a basic examples of:
 * Checking for the existence of a Gateway token
 * Issuing a token from the server side (gatekeeper signs & pays)
 * Issuing a token from the client side (signed and paid by the user's wallet)
+* Executing a transfor of SOL through a program that checks for the existence of the gateway token
 
 ## Run the demo
 The following command will bundle the frontend and launch and express server serving both the static frontend

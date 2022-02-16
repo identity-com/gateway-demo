@@ -3,13 +3,16 @@ import {initWalletUI} from './ui/wallet';
 import {Transaction, Connection, clusterApiUrl, Keypair, PublicKey} from '@solana/web3.js';
 import bs58 from 'bs58';
 import ui from './ui/';
-import {findGatewayToken} from "@identity.com/solana-gateway-ts";
-import {createTransferTransaction, tokenUrl} from "./util";
+import {findGatewayToken, getGatewayTokenAddressForOwnerAndGatekeeperNetwork} from "@identity.com/solana-gateway-ts";
+import {tokenUrl, getProgramTransferInstruction} from "./util";
 import config from '../../config';
 
-const gatekeeperNetwork = new PublicKey(config.gatekeeperNetworkPublicKey58);
+// The gatekeeper network
+const GATEKEEPER_NETWORK = new PublicKey(config.gatekeeperNetworkPublicKey58);
+const LAMPORTS_TO_TRANSFER = 1000000;
 let connection = new Connection(clusterApiUrl(config.solanaCluster), 'confirmed');
 let connectedWallet;
+let connectedToken;
 
 /**
  * Triggers when the user connects a wallet
@@ -22,10 +25,12 @@ const onWalletConnected = async (wallet) => {
   ui.showTokenChecking();
 
   // Check if the user has a token and update the UI accordingly
-  findGatewayToken(connection, wallet.publicKey, gatekeeperNetwork)
+  findGatewayToken(connection, wallet.publicKey, GATEKEEPER_NETWORK)
     .then(token => {
+      connectedToken = token;
       if (token) {
-        console.log('Found token', token);
+        console.log('Found token');
+        console.log(JSON.stringify(token, null, 2));
         ui.showToken(true);
       } else {
         console.log('No token found');
@@ -47,6 +52,7 @@ const onWalletDisconnected = () => {
  * Sends the required transactions. If a serialized transaction is provided it will be included
  */
 const sendTransactions = async (data) => {
+  const recipient = Keypair.generate().publicKey;
   const transactions = [];
 
   // Sign locally if a serialized transaction is returned
@@ -55,24 +61,42 @@ const sendTransactions = async (data) => {
     transactions.push(tokenTransaction);
   }
 
-  const recipient = Keypair.generate().publicKey;
-  const transferTransaction = await createTransferTransaction(
-    connection,
+  // Derive the gateway token address
+  const tokenAddress = await getGatewayTokenAddressForOwnerAndGatekeeperNetwork(
     connectedWallet.publicKey,
+    GATEKEEPER_NETWORK
+  );
+
+  console.log(`Create instruction to check gateway token ${tokenAddress} is valid for `
+    + `${connectedWallet.publicKey.toBase58()}, then sending ${LAMPORTS_TO_TRANSFER} ` +
+    +`lamports to ${recipient.toBase58()}`);
+
+  const transferIx = await getProgramTransferInstruction(
+    connection,
+    connectedWallet,
+    tokenAddress,
     recipient,
-    1);
+    LAMPORTS_TO_TRANSFER
+  );
+
+  const {blockhash: recentBlockhash} = await connection.getRecentBlockhash();
+  const transferTransaction = new Transaction({recentBlockhash, feePayer: connectedWallet.publicKey}).add(transferIx);
+
   transactions.push(transferTransaction);
 
   const signedTransactions = await connectedWallet.signAllTransactions(transactions);
 
-  const promises = signedTransactions.map(async (transaction) => {
-    const signature = await connection.sendRawTransaction(transaction.serialize());
-    return connection.confirmTransaction(signature);
-  });
+  for (const signedTransaction of signedTransactions) {
+    const signature = await connection.sendRawTransaction(signedTransaction.serialize()).catch(e => {
+      ui.showError(e);
+      throw e;
+    });
+    await connection.confirmTransaction(signature);
+  }
 
-  await Promise.all(promises).then(() => {
-    ui.showToken(true);
-  });
+  alert(`Token verified and SOL transfered to ${recipient.toBase58()}`);
+
+  ui.showToken(true);
 }
 
 /**
@@ -80,7 +104,7 @@ const sendTransactions = async (data) => {
  */
 const issueToken = (clientSigns = true) => {
   fetch(tokenUrl(connectedWallet.publicKey, clientSigns))
-    .then(async(response) => {
+    .then(async (response) => {
       if (!response.ok) {
         const json = await response.json();
 

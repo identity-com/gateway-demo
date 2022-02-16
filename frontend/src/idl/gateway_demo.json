@@ -1,0 +1,40 @@
+{
+  "version": "0.1.0",
+  "name": "gateway_demo",
+  "instructions": [
+    {
+      "name": "transfer",
+      "accounts": [
+        {
+          "name": "gatewayToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "recipient",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "address": "Cq18woAS5xVXb6Ci24pxk6f1ptLx4h3HHcxm12LZPt1e"
+  }
+}
