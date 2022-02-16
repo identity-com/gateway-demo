@@ -6,7 +6,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <style>
-        #body { display: none }
+        #body {
+            display: none
+        }
     </style>
 </head>
 <body>
@@ -49,9 +51,21 @@
             Looking for existing token
         </div>
         <div id="token" class="hidden">
-            <button id="token-issue-server-btn">Issue Token &amp; Transfer<br/><small>(server signs &amp; sends)</small></button>
-            <button id="token-issue-client-btn">Issue Token &amp; Transfer<br/><small>(client signs &amp; sends)</small></button>
-            <button id="transfer-btn">Transfer<br/><small>(token exists)</small></button>
+            <h3>Transfer to Recipient</h3>
+            <div id="recipient-input">
+                <input id="recipient-address" placeholder="Recipient Public Key"/>
+                <input id="recipient-lamports" type="number" placeholder="SOL to Transfer"/>
+            </div>
+            <div>
+                <button id="token-issue-server-btn">Issue Token &amp; Transfer<br/><small>
+                    (server signs &amp; sends)
+                </small>
+                </button>
+                <button id="token-issue-client-btn">Issue Token &amp; Transfer<br/><small>
+                    (client signs &amp; sends)</small>
+                </button>
+                <button id="transfer-btn">Transfer<br/><small>(token exists)</small></button>
+            </div>
         </div>
     </main>
 </div>

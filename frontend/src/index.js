@@ -1,6 +1,6 @@
 import './index.css';
 import {initWalletUI} from './ui/wallet';
-import {Transaction, Connection, clusterApiUrl, Keypair, PublicKey} from '@solana/web3.js';
+import {Transaction, Connection, clusterApiUrl, LAMPORTS_PER_SOL, PublicKey} from '@solana/web3.js';
 import bs58 from 'bs58';
 import ui from './ui/';
 import {findGatewayToken, getGatewayTokenAddressForOwnerAndGatekeeperNetwork} from "@identity.com/solana-gateway-ts";
@@ -9,7 +9,6 @@ import config from '../../config';
 
 // The gatekeeper network
 const GATEKEEPER_NETWORK = new PublicKey(config.gatekeeperNetworkPublicKey58);
-const LAMPORTS_TO_TRANSFER = 1000000;
 let connection = new Connection(clusterApiUrl(config.solanaCluster), 'confirmed');
 let connectedWallet;
 let connectedToken;
@@ -52,7 +51,8 @@ const onWalletDisconnected = () => {
  * Sends the required transactions. If a serialized transaction is provided it will be included
  */
 const sendTransactions = async (data) => {
-  const recipient = Keypair.generate().publicKey;
+  const {recipient, sol} = ui.recipient();
+
   const transactions = [];
 
   // Sign locally if a serialized transaction is returned
@@ -67,16 +67,16 @@ const sendTransactions = async (data) => {
     GATEKEEPER_NETWORK
   );
 
-  console.log(`Create instruction to check gateway token ${tokenAddress} is valid for `
-    + `${connectedWallet.publicKey.toBase58()}, then sending ${LAMPORTS_TO_TRANSFER} ` +
-    +`lamports to ${recipient.toBase58()}`);
+  console.log(`Create instruction to check gateway token ${tokenAddress} is valid for ${connectedWallet.publicKey.toBase58()}, then sending ${sol} SOL to ${recipient.toBase58()}`);
+
+  const lamports = LAMPORTS_PER_SOL * sol;
 
   const transferIx = await getProgramTransferInstruction(
     connection,
     connectedWallet,
     tokenAddress,
     recipient,
-    LAMPORTS_TO_TRANSFER
+    lamports
   );
 
   const {blockhash: recentBlockhash} = await connection.getRecentBlockhash();

@@ -86,7 +86,7 @@ body, #body, html {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     height: 100%;
     gap: 0.5em;
 }
@@ -96,6 +96,18 @@ body, #body, html {
     align-items: center;
     height: 100%;
     justify-content: center;
+}
+
+#recipient-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5em;
+    width: 60%;
+}
+
+#recipient-input > input {
+    width: 100%;
 }
 
 #body {
