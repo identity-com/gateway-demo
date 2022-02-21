@@ -2,6 +2,7 @@ const express = require('express');
 const {Keypair, PublicKey, Connection, clusterApiUrl} = require('@solana/web3.js');
 const {GatekeeperService} = require('@identity.com/solana-gatekeeper-lib');
 const bs58 = require('bs58');
+const cors = require('cors');
 const config = require('./config');
 
 const app = express();
@@ -9,6 +10,8 @@ const port = config.serverPort || 3000;
 
 const gatekeeperAuthority = Keypair.fromSecretKey(bs58.decode(config.gatekeeperAuthoritySecretKey58));
 const gatekeeperNetwork = new PublicKey(config.gatekeeperNetworkPublicKey58);
+
+app.use(cors());
 
 app.get('/api/token/:key', async (request, response) => {
   response.setHeader('Content-Type', 'application/json');

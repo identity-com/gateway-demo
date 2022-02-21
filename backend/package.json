@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@identity.com/solana-gatekeeper-lib": "^4.0.0-beta4",
+    "cors": "^2.8.5",
     "express": "^4.17.2"
   },
   "devDependencies": {

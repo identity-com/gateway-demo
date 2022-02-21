@@ -24,7 +24,7 @@ export const createTransferTransaction = async (
 /**
  * Generate the token URL to fetch the token/signature from the backend
  */
-export const tokenUrl = (publicKey, clientSigns) => `/api/token/${publicKey.toBase58()}?clientSigns=${clientSigns}`;
+export const tokenUrl = (publicKey, clientSigns) => `http://localhost:3000/api/token/${publicKey.toBase58()}?clientSigns=${clientSigns}`;
 
 /**
  * Calls the on-chain gateway demo program to validate the token and if valid, transfer lamports to the recipient
