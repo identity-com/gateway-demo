@@ -2,7 +2,17 @@ import {SystemProgram, Transaction} from "@solana/web3.js";
 import * as anchor from "@project-serum/anchor";
 import idl from "./idl/gateway_demo.json";
 
-export const config = require(process.env.STAGE ? `./config/${process.env.STAGE}.js` : `./config/default.js`);
+const loadConfig = () => {
+  const defaultConfig = require('./config/default');
+  const stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
+
+  return {
+    ...defaultConfig,
+    ...stageConfig,
+  }
+}
+
+export const config = loadConfig();
 
 /**
  * Creates a transfer transaction

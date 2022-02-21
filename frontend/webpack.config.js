@@ -25,7 +25,7 @@ module.exports = {
       template: 'src/index.html'
     }),
     new webpack.DefinePlugin({
-      'process.env.STAGE': process.env.STAGE
+      'process.env.STAGE': JSON.stringify(process.env.STAGE)
     })
   ],
   module: {
