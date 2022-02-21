@@ -6,5 +6,7 @@ module.exports = {
   // The solana cluster to use (used in the frontend and backend)
   solanaCluster: 'devnet',
   // The port to run the web server on
-  serverPort: 3000
+  serverPort: 3000,
+  // Serve static content from the frontend
+  serveStatic: true
 }

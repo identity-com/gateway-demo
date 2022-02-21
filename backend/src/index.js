@@ -3,7 +3,25 @@ const {Keypair, PublicKey, Connection, clusterApiUrl} = require('@solana/web3.js
 const {GatekeeperService} = require('@identity.com/solana-gatekeeper-lib');
 const bs58 = require('bs58');
 const cors = require('cors');
-const config = require('./config');
+console.log(process.env);
+
+const loadConfig = () => {
+  const defaultConfig = require('./config/default');
+  // const stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
+  const stageConfig = require(`./config/${process.env.STAGE}.js`);
+console.log(require(`./config/prod.js`));
+  console.log('------>')
+  console.log(stageConfig);
+  console.log('------>')
+
+  return {
+    ...defaultConfig,
+    ...stageConfig,
+  }
+}
+
+const config = loadConfig();
+console.log(config);
 
 const app = express();
 const port = config.serverPort || 3000;
@@ -55,7 +73,9 @@ app.get('/api/token/:key', async (request, response) => {
   }
 });
 
-// app.use(express.static('../frontend/dist'))
+if (config.serveStatic) {
+  app.use(express.static('../frontend/dist'))
+}
 
 app.listen(port, () => {
   console.log(`Started Gateway Demo at http://localhost:${port}/`);
