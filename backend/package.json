@@ -7,7 +7,7 @@
     "watch": "nodemon src/index.js"
   },
   "dependencies": {
-    "@identity.com/solana-gateway-ts": "^0.8.1",
+    "@identity.com/solana-gatekeeper-lib": "^4.0.0-beta4",
     "express": "^4.17.2"
   },
   "devDependencies": {

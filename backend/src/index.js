@@ -2,7 +2,7 @@ const express = require('express');
 const {Keypair, PublicKey, Connection, clusterApiUrl} = require('@solana/web3.js');
 const {GatekeeperService} = require('@identity.com/solana-gatekeeper-lib');
 const bs58 = require('bs58');
-const config = require('../../config');
+const config = require('./config');
 
 const app = express();
 const port = config.serverPort || 3000;
@@ -52,7 +52,7 @@ app.get('/api/token/:key', async (request, response) => {
   }
 });
 
-app.use(express.static('../frontend/dist'))
+// app.use(express.static('../frontend/dist'))
 
 app.listen(port, () => {
   console.log(`Started Gateway Demo at http://localhost:${port}/`);
