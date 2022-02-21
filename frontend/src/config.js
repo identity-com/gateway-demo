@@ -3,4 +3,5 @@ module.exports = {
   gatekeeperNetworkPublicKey58: 'tgnuXXNMDLK8dy7Xm1TdeGyc95MDym4bvAQCwcW21Bf',
   // The solana cluster to use (used in the frontend and backend)
   solanaCluster: 'devnet',
+  apiEndpointBaseUrl: 'http://localhost:3000'
 }

@@ -2,6 +2,8 @@ import {SystemProgram, Transaction} from "@solana/web3.js";
 import * as anchor from "@project-serum/anchor";
 import idl from "./idl/gateway_demo.json";
 
+const config = require('./config');
+
 /**
  * Creates a transfer transaction
  */
@@ -24,7 +26,7 @@ export const createTransferTransaction = async (
 /**
  * Generate the token URL to fetch the token/signature from the backend
  */
-export const tokenUrl = (publicKey, clientSigns) => `http://localhost:3000/api/token/${publicKey.toBase58()}?clientSigns=${clientSigns}`;
+export const tokenUrl = (publicKey, clientSigns) => `${config.apiEndpointBaseUrl}/api/token/${publicKey.toBase58()}?clientSigns=${clientSigns}`;
 
 /**
  * Calls the on-chain gateway demo program to validate the token and if valid, transfer lamports to the recipient
