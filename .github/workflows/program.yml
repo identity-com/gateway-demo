@@ -1,4 +1,4 @@
-name: Programs-Cryptid-Signer
+name: Gatway-Demo-Program
 on:
   push:
 #    paths:
@@ -7,14 +7,13 @@ on:
 jobs:
   build-deploy:
     name: Deploy the program, built on Solana ${{ matrix.solana }}, Rust ${{ matrix.rust }}, and ${{ matrix.os }}
-#    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     env:
       SOLANA_PROGRAM_ID: Cq18woAS5xVXb6Ci24pxk6f1ptLx4h3HHcxm12LZPt1e
       SOLANA_AUTHORITY: ${{ secrets.SOLANA_DEV_AUTHORITY }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        rust: ['1.59']
+        rust: ['1.58.1']
         solana: ['v1.8.14']
         os: [ubuntu-latest]
 
