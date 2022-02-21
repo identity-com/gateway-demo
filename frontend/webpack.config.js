@@ -24,6 +24,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
+    new webpack.DefinePlugin({
+      'process.env.STAGE': process.env.STAGE
+    })
   ],
   module: {
     rules: [

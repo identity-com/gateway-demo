@@ -4,8 +4,7 @@ import {Transaction, Connection, clusterApiUrl, LAMPORTS_PER_SOL, PublicKey} fro
 import bs58 from 'bs58';
 import ui from './ui/';
 import {findGatewayToken, getGatewayTokenAddressForOwnerAndGatekeeperNetwork} from "@identity.com/solana-gateway-ts";
-import {tokenUrl, getProgramTransferInstruction} from "./util";
-import config from './config';
+import {tokenUrl, getProgramTransferInstruction, config} from "./util";
 
 // The gatekeeper network
 const GATEKEEPER_NETWORK = new PublicKey(config.gatekeeperNetworkPublicKey58);
