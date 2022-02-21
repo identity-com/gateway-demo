@@ -1,4 +1,4 @@
-name: Gatway-Demo-Program
+name: Gateway Sample Program
 on:
   push:
     paths:
