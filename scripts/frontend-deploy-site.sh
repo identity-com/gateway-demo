@@ -2,6 +2,8 @@
 set -e
 set -u
 
+FOLDER="/protected-transfer"
+
 if [ "${STAGE}" == "prod" ]; then
   DISTRIBUTION=E2S4Y0ZV7EAMWM
   BUCKET=demo.identity.com
@@ -13,4 +15,4 @@ elif [ ${STAGE} == "dev" ]; then
   BUCKET=demo-dev.identity.com
 fi
 
-npx deploy-aws-s3-cloudfront --non-interactive --react --bucket ${BUCKET} --destination ${STAGE} --distribution ${DISTRIBUTION}
+npx deploy-aws-s3-cloudfront --non-interactive --react --bucket ${BUCKET} --destination ${FOLDER} --distribution ${DISTRIBUTION}

@@ -1,8 +1,8 @@
 name: Gateway Sample Frontend
 on:
-  paths:
-    - 'frontend/**'
   push:
+    paths:
+      - 'frontend/**'
     branches:
       - main
 jobs:
