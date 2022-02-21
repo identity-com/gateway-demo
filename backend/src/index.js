@@ -3,16 +3,10 @@ const {Keypair, PublicKey, Connection, clusterApiUrl} = require('@solana/web3.js
 const {GatekeeperService} = require('@identity.com/solana-gatekeeper-lib');
 const bs58 = require('bs58');
 const cors = require('cors');
-console.log(process.env);
 
 const loadConfig = () => {
   const defaultConfig = require('./config/default');
-  // const stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
-  const stageConfig = require(`./config/${process.env.STAGE}.js`);
-console.log(require(`./config/prod.js`));
-  console.log('------>')
-  console.log(stageConfig);
-  console.log('------>')
+  const stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
 
   return {
     ...defaultConfig,
