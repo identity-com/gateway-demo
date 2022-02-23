@@ -3,8 +3,8 @@ on:
   push:
 #    paths:
 #      - 'backend/**'
-    branches:
-      - main
+#    branches:
+#      - main
     tags:
       - v*
 env:
