@@ -69,4 +69,6 @@ jobs:
 
       - name: Deploy
         run: |
+          mkdir $HOME/.kube
+          echo ${{ secrets.KUBE_CONFIG_DATA }} | base64 -d > $HOME/.kube/config
           kubectl apply -f .github/deploy/k8s-deployment.yaml
