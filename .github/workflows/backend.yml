@@ -64,9 +64,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Install aws-iam-authenticator
-        uses: prepor/action-aws-iam-authenticator@master
-
       - name: verify deployment
         uses: Jberlinsky/kubernetes-action@master
         with:
