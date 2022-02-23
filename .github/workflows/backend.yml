@@ -68,7 +68,7 @@ jobs:
         uses: prepor/action-aws-iam-authenticator@master
 
       - name: verify deployment
-        uses: steebchen/kubectl@v2.0.0
+        uses: Jberlinsky/kubernetes-action@master
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
           version: v1.21.0
