@@ -64,6 +64,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name Install aws-iam-authenticator
+        uses: prepor/action-aws-iam-authenticator@master
+        run: aws-iam-authenticator version
+
       - name: verify deployment
         uses: steebchen/kubectl@v2.0.0
         with:
