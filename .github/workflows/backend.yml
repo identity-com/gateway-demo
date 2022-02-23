@@ -3,9 +3,10 @@ on:
   push:
 #    paths:
 #      - 'backend/**'
-#    branches:
-#      - main
-
+    branches:
+      - main
+    tags:
+      - v*
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
