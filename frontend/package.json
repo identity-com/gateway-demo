@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch --progress",
-    "deploy": "STAGE=${STAGE:-dev} etc/deploy/deploy-site.sh"
+    "build": "STAGE=${STAGE:-local} webpack",
+    "watch": "STAGE=${STAGE:-local} webpack --watch --progress"
   },
   "dependencies": {
     "@identity.com/solana-gateway-ts": "^0.8.1",

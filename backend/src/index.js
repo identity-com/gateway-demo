@@ -6,7 +6,14 @@ const cors = require('cors');
 
 const loadConfig = () => {
   const defaultConfig = require('./config/default');
-  const stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
+  let stageConfig = {};
+console.log(process.env.STAGE);
+  try {
+    stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
+  } catch (e) {
+    console.log(e);
+    // ignore if no config is found
+  }
 
   return {
     ...defaultConfig,

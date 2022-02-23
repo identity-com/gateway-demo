@@ -1,3 +1,3 @@
 module.exports = {
-  serveStatic: false
+  serveStatic: true
 }

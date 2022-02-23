@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "serve": "node src/index.js",
-    "watch": "nodemon src/index.js"
+    "serve": "STAGE=${STAGE:-local} node src/index.js",
+    "watch": "STAGE=${STAGE:-local} nodemon src/index.js"
   },
   "dependencies": {
     "@identity.com/solana-gatekeeper-lib": "^4.0.0-beta4",

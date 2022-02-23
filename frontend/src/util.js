@@ -4,8 +4,13 @@ import idl from "./idl/gateway_demo.json";
 
 const loadConfig = () => {
   const defaultConfig = require('./config/default');
-  const stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
 
+  let stageConfig = {};
+  try {
+    stageConfig = process.env.STAGE ? require(`./config/${process.env.STAGE}.js`) : {};
+  } catch (e) {
+    // ignore if no config is found
+  }
   return {
     ...defaultConfig,
     ...stageConfig,

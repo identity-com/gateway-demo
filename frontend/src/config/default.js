@@ -1,7 +1,8 @@
 module.exports = {
-  // The base58 encoded public key for the gatekeeper network (used in the frontend and backend)
+  // The base58 encoded public key for the gatekeeper network
   gatekeeperNetworkPublicKey58: 'tgnuXXNMDLK8dy7Xm1TdeGyc95MDym4bvAQCwcW21Bf',
-  // The solana cluster to use (used in the frontend and backend)
+  // The solana cluster to use
   solanaCluster: 'devnet',
-  apiEndpointBaseUrl: 'http://localhost:3000'
+  // The endpoint base url for the backend
+  apiEndpointBaseUrl: 'https://gatekeeper-demo.identity.com',
 }
