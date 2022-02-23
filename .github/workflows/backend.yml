@@ -64,9 +64,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: verify deployment
-        uses: Jberlinsky/kubernetes-action@master
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v2.0
         with:
-          config: ${{ secrets.KUBE_CONFIG_DATA }}
-          version: v1.21.0
-          command: apply -f .github/deploy/k8s-deployment.yaml
+          version: '1.2.1'
+
+      - name: Deploy
+        run: |
+          kubectl apply -f .github/deploy/k8s-deployment.yaml
