@@ -68,7 +68,7 @@ yarn workspace @identity.com/gateway-demo-backend watch
 This will launch the backend express app, and automatically re-run on save. By default it will serve the content from
 the frontend project at `frontend/dist` ;
 
-## Program
+### Program
 The sample Solana program provided is developed using [Anchor](https://github.com/project-serum/anchor). You will need
 the following:
 
