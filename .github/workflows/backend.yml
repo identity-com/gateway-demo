@@ -73,5 +73,4 @@ jobs:
           chmod a+x /usr/local/bin/aws-iam-authenticator
           mkdir $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $HOME/.kube/config
-          cat $HOME/.kube/config
           kubectl apply -f .github/deploy/k8s-deployment.yaml
