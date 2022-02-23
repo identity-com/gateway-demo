@@ -1,10 +1,10 @@
 name: Gateway Sample Backend
 on:
   push:
-    paths:
-      - 'backend/**'
-    branches:
-      - main
+#    paths:
+#      - 'backend/**'
+#    branches:
+#      - main
 jobs:
   frontend:
     name: Build and deploy the sample frontend on Node ${{ matrix.node }} and ${{ matrix.os }}
@@ -30,6 +30,9 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Build, tag, and push image to Amazon ECR
-        run: |
-          ./scripts/backend-deploy-and-push.sh
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
