@@ -7,7 +7,10 @@ The Gateway demo application show a basic examples of:
 * Issuing a token from the client side (signed and paid by the user's wallet)
 * Executing a transfer of SOL through a program that checks for the existence of the gateway token
 
-## Run the demo
+## Live Demo
+A live demo can be accessed at [http://demo.identity.com/protected-transfer/](http://demo.identity.com/protected-transfer/).
+
+## Run the demo locally
 The following command will bundle the frontend and launch an express server serving both the static frontend
 content and the backend web service.
 ```bash
