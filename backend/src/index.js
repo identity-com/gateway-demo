@@ -22,7 +22,6 @@ const loadConfig = () => {
 }
 
 const config = loadConfig();
-console.log(config);
 
 const app = express();
 const port = config.serverPort || 3000;
@@ -74,8 +73,12 @@ app.get('/api/token/:key', async (request, response) => {
   }
 });
 
-if (config.serveStatic) {
+if (false && config.serveStatic) {
   app.use(express.static('../frontend/dist'))
+} else {
+  app.get('/', (request, response) => {
+    response.status(200).send('');
+  });
 }
 
 app.listen(port, () => {
