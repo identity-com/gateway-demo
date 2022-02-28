@@ -11,6 +11,7 @@ const loadConfig = () => {
   } catch (e) {
     // ignore if no config is found
   }
+
   return {
     ...defaultConfig,
     ...stageConfig,
