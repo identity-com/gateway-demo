@@ -1,3 +1,3 @@
 module.exports = {
-  apiEndpointBaseUrl: 'http://localhost:3000'
+  apiEndpointBaseUrl: 'http://127.0.0.1:3000'
 }

@@ -5,8 +5,10 @@ WORKDIR /var/gateway-demo/app/
 
 COPY backend/ .
 
+ENV STAGE=prod
+
 RUN yarn
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD [ "node", "src/index.js" ]
