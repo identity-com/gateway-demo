@@ -8,9 +8,10 @@ The Gateway demo application show a basic examples of:
 * Executing a transfer of SOL through a program that checks for the existence of the gateway token
 
 ## Live Demo
-A live demo can be accessed at [http://demo.identity.com/protected-transfer/](http://demo.identity.com/protected-transfer/).
+A live demo can be accessed at [https://demo.identity.com/protected-transfer/index.html](https://demo.identity.com/protected-transfer/index.html).
 
 ## Run the demo locally
+The source code for the project is hosted on Github [here](https://github.com/identity-com/gateway-demo).
 The following command will bundle the frontend and launch an express server serving both the static frontend
 content and the backend web service.
 ```bash
@@ -22,7 +23,7 @@ To configure the application to use a different gatekeeper, network or other set
 
 ### Frontend Configuration
 
-The default frontend configuration can be found at `frontend/src/config/default.js`, and can be overridden based on 
+The default frontend configuration can be found at `frontend/src/config/default.js`, and can be overridden based on
 the `STAGE` environment variable at `frontend/src/config/{STAGE}.js`
 
 ```javascript
@@ -93,7 +94,7 @@ solana -k program/target/deploy/gateway_demo-keypair.json address
 ```
 or replace it with your own Solana key.
 
-Update the program ID in [programs/gateway_demo/src/lib.rs](program/programs/gateway_demo/src/lib.rs) by replacing:
+Update the program ID in `programs/gateway_demo/src/lib.rs` by replacing:
 ```rust
 declare_id!("<your program id>");
 ```
