@@ -1,10 +1,8 @@
 name: Gateway Sample Backend
 on:
   push:
-#    paths:
-#      - 'backend/**'
-#    branches:
-#      - main
+    paths:
+      - 'backend/**'
     tags:
       - v*
 env:

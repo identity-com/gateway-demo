@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - 'program/programs/gateway_demo/**'
-    branches:
-      - main
+    tags:
+      - v*
 jobs:
   build-deploy:
     name: Deploy the program, built on Solana ${{ matrix.solana }}, Rust ${{ matrix.rust }}, and ${{ matrix.os }}
