@@ -1,10 +1,12 @@
 name: Gateway Sample Backend
 on:
   push:
-    paths:
-      - 'backend/**'
+#    paths:
+#      - 'backend/**'
 #    tags:
 #      - v*
+    branches:
+      - main
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -67,8 +69,17 @@ jobs:
 
       - name: Deploy
         run: |
+          # Download aws-iam-authenticator
           curl -o /usr/local/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
           chmod a+x /usr/local/bin/aws-iam-authenticator
+          
+          # Save the KUBECONFIG
           mkdir $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $HOME/.kube/config
-          kubectl apply -f .github/deploy/k8s-deployment.yaml
+
+          # Install helm          
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+          
+          helm version
