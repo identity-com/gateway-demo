@@ -1,10 +1,12 @@
 name: Gateway Sample Frontend
 on:
   push:
-    paths:
-      - 'frontend/**'
+#    paths:
+#      - 'frontend/**'
 #    tags:
 #      - v*
+     branches:
+       - main
 jobs:
   frontend:
     name: Build and deploy the sample frontend on Node ${{ matrix.node }} and ${{ matrix.os }}
