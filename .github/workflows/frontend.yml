@@ -49,4 +49,4 @@ jobs:
           aws-region: us-east-2
 
       - name: Deploy
-        run: ./.github/deploy/frontend-deploy-site.sh
+        run: STAGE=prod ./.github/deploy/frontend-deploy-site.sh
