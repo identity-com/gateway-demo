@@ -39,12 +39,12 @@ jobs:
       - name: Build
         run: STAGE=prod yarn workspace @identity.com/gateway-demo-frontend build
 
-#      - name: Configure AWS Credentials
-#          uses: aws-actions/configure-aws-credentials@v1
-#          with:
-#            aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
-#            aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-#            aws-region: us-east-1
-#
-#      - name: Deploy
-#          run: yarn workspace @identity.com/gateway-demo-frontend deploy
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Deploy
+        run: ./.github/deploy/frontend-deploy-site.sh

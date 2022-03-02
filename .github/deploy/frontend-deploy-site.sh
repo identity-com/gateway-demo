@@ -16,6 +16,4 @@ elif [ ${STAGE} == "dev" ]; then
   BUCKET=???
 fi
 
-echo $SOURCE
-
-npx deploy-aws-s3-cloudfront --non-interactive --react --source ${SOURCE} --bucket ${BUCKET} --destination ${FOLDER} --distribution ${DISTRIBUTION}
+npx deploy-aws-s3-cloudfront --non-interactive --source ${SOURCE} --bucket ${BUCKET} --destination ${FOLDER} --distribution ${DISTRIBUTION}
