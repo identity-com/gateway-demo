@@ -77,7 +77,7 @@ if (config.serveStatic) {
   app.use(express.static('../frontend/dist'))
 } else {
   app.get('/', (request, response) => {
-    response.status(200).send('');
+    response.status(200).send('v0.0.6');
   });
 }
 

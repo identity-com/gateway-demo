@@ -3,10 +3,8 @@ on:
   push:
 #    paths:
 #      - 'backend/**'
-#    tags:
-#      - v*
-    branches:
-      - main
+    tags:
+      - v*
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -56,32 +54,3 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v2.0
-
-      - name: Install Dependencies
-        run: |
-          # Download aws-iam-authenticator
-          curl -o /usr/local/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
-          chmod a+x /usr/local/bin/aws-iam-authenticator
-          
-          # Save the KUBECONFIG
-          mkdir $HOME/.kube
-          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $HOME/.kube/config
-
-          # Install helm          
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-          chmod 700 get_helm.sh
-          ./get_helm.sh
-
-      - name: Deploy
-        run: |
-          helm upgrade gatekeeper-demo .github/deploy/backend
