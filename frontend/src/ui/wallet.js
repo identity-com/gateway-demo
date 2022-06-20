@@ -1,9 +1,10 @@
-import {getPhantomWallet, getSolletWallet} from "@identity.com/wallet-adapter-wallets";
+import {getPhantomWallet, getSolletWallet, getCryptidWallet} from "@identity.com/wallet-adapter-wallets";
 
 // The wallets to use
 const WALLETS = [
   getPhantomWallet(),
   getSolletWallet(),
+  getCryptidWallet()
 ]
 
 /**
