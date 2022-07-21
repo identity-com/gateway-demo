@@ -7,7 +7,7 @@ SOURCE="./frontend/dist/"
 
 if [ "${STAGE}" == "prod" ]; then
   DISTRIBUTION=E23FRNHUJ372ZZ
-  BUCKET="demo-identity-com"
+  BUCKET="demo.identity.com"
 elif [ ${STAGE} == "preprod" ]; then
   DISTRIBUTION=???
   BUCKET=???
